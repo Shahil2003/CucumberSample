@@ -34,6 +34,12 @@ public class LoginTest {
     public void i_click_the_login_button() {
         login.buttonClick();
     }
+    
+    @Then("I should see the dashboard page with title {string}")
+    public void i_should_see_the_dashboard_page_with_title(String expectedTitle) {
+        String actualTitle = login.getDashboard();
+        Assert.assertEquals(actualTitle, expectedTitle);
+    }
 
     @Then("I should see an error message {string}")
     public void i_should_see_an_error_message(String expectedError) {
@@ -41,33 +47,33 @@ public class LoginTest {
         Assert.assertEquals(actualError, expectedError);
     }
     
-    @Then("I should see an error message {string}")
+    @Then("I should see another error message {string}")
     public void i_should_see_another_error_message(String expectedError) {
-        String actualError = login.getError();
+        String actualError = login.get_Required_Error();
         Assert.assertEquals(actualError, expectedError);
     }
-
-    @Then("I should see the dashboard page with title {string}")
-    public void i_should_see_the_dashboard_page_with_title(String expectedTitle) {
-        String actualTitle = login.getDashboard();
-        Assert.assertEquals(actualTitle, expectedTitle);
-    }
+   
     
-//    @Given("I am logged in as an admin on the OrangeHRM dashboard")
-//    public void i_am_logged_in_as_an_admin_on_the_orange_hrm_dashboard() {
-//        // Write code here that turns the phrase above into concrete actions
-//        throw new io.cucumber.java.PendingException();
-//    }
-//
-//    @When("I click on the Assign Leave button")
-//    public void i_click_on_the_assign_leave_button() {
-//        // Write code here that turns the phrase above into concrete actions
-//        throw new io.cucumber.java.PendingException();
-//    }
-//
-//    @Then("I should be navigated to the Assign Leave page with URL {string}")
-//    public void i_should_be_navigated_to_the_assign_leave_page_with_url(String string) {
-//        // Write code here that turns the phrase above into concrete actions
-//        throw new io.cucumber.java.PendingException();
-//    }
+    @Given("I am logged in as an admin on the OrangeHRM dashboard")
+    public void i_am_logged_in_as_an_admin_on_the_orange_hrm_dashboard() {
+    	driver = new ChromeDriver();
+        driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        login = new LoginPage(driver);
+        login.setUsername("Admin");
+        login.setPassword("admin123");
+        login.buttonClick();
+    }
+
+    @When("I click on the Assign Leave button")
+    public void i_click_on_the_assign_leave_button() {
+        login.AssignLeaveButton();
+    }
+
+    @Then("I should be navigated to the Assign Leave page with URL {string}")
+    public void i_should_be_navigated_to_the_assign_leave_page_with_url(String expectedUrl) {
+        String actualUrl = login.getUrl();
+        Assert.assertEquals(actualUrl, expectedUrl);
+    }
 }

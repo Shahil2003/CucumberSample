@@ -17,5 +17,3 @@ Feature: Login Feature
     When I enter username "" and password "admin123"
     And I click the login button
     Then I should see another error message "Required"
-
-  

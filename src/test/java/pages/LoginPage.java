@@ -16,7 +16,7 @@ public class LoginPage {
 	public void setUsername(String uname) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		WebElement usernameField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@name='username']")));
-		usernameField.sendKeys("Admin");
+		usernameField.sendKeys(uname);
 
 	}
 	
@@ -50,5 +50,15 @@ public class LoginPage {
 		String actualTitle = dashboardTitle.getText();
 		return actualTitle;
 
+	}
+	
+	public void AssignLeaveButton() {
+		WebElement btn=driver.findElement(By.xpath("//button[@title='Assign Leave']"));
+		btn.click();
+	}
+	
+	public String getUrl() {
+		String url = driver.getCurrentUrl();
+		return url;
 	}
 }
