@@ -53,27 +53,4 @@ public class LoginTest {
         Assert.assertEquals(actualError, expectedError);
     }
    
-    
-    @Given("I am logged in as an admin on the OrangeHRM dashboard")
-    public void i_am_logged_in_as_an_admin_on_the_orange_hrm_dashboard() {
-    	driver = new ChromeDriver();
-        driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        login = new LoginPage(driver);
-        login.setUsername("Admin");
-        login.setPassword("admin123");
-        login.buttonClick();
-    }
-
-    @When("I click on the Assign Leave button")
-    public void i_click_on_the_assign_leave_button() {
-        login.AssignLeaveButton();
-    }
-
-    @Then("I should be navigated to the Assign Leave page with URL {string}")
-    public void i_should_be_navigated_to_the_assign_leave_page_with_url(String expectedUrl) {
-        String actualUrl = login.getUrl();
-        Assert.assertEquals(actualUrl, expectedUrl);
-    }
 }

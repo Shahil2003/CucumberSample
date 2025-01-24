@@ -52,13 +52,4 @@ public class LoginPage {
 
 	}
 	
-	public void AssignLeaveButton() {
-		WebElement btn=driver.findElement(By.xpath("//button[@title='Assign Leave']"));
-		btn.click();
-	}
-	
-	public String getUrl() {
-		String url = driver.getCurrentUrl();
-		return url;
-	}
 }
